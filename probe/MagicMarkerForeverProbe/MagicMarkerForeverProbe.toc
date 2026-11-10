@@ -1,0 +1,8 @@
+## Interface: 16001
+## Title: MagicMarker Forever Feasibility Probe
+## Notes: Out-of-combat ALT + mouseover raid marker API probe
+## Author: MagicMarker Forever contributors
+## Version: 0.1.0-probe
+## X-License: GPL-3.0-or-later
+## SavedVariables: MagicMarkerForeverProbeDB
+Probe.lua

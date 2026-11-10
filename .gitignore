@@ -1,0 +1,7 @@
+upstream/
+dist/
+*.luac
+*.log
+__pycache__/
+*.pyc
+.DS_Store
