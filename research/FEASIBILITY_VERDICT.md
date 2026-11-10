@@ -15,3 +15,13 @@ No supported mechanism is currently evidenced that turns each mouseover transiti
 ## Next step
 
 Do not invest in a broader port around direct `SetRaidTarget`. A narrowly scoped secure-hover spike is justified only if a primary Forever API/source reference or maintainer confirmation identifies a supported secure action triggered by mouse-enter without a click/key press. Otherwise the required interaction remains unsupported by the evidence collected, and the project should report that limitation rather than claim a working fork.
+
+## Supported-path source review
+
+The PM additionally reviewed the Forever branch of Blizzard UI source mirrored by Gethe:
+
+- [SecureTemplates.lua](https://github.com/Gethe/wow-ui-source/blob/forever/Interface/AddOns/Blizzard_FrameXML/SecureTemplates.lua): secure actions are dispatched through button activation. A native `SECURE_ACTIONS.raidtarget` exists with marker and action attributes, including `set-unmarked`; marking is not limited to macros. Modifier state selects action attributes, not a new activation for each world mouseover.
+- [RestrictedFrames.lua](https://github.com/Gethe/wow-ui-source/blob/forever/Interface/AddOns/Blizzard_RestrictedAddOnEnvironment/RestrictedFrames.lua): the exposed frame-handle methods include `SetBindingClick`, which installs a binding, but no direct `Click` method. `CallMethod` deliberately calls `forceinsecure()` before invoking the external method, so it does not provide a secure route back into ordinary addon marking code.
+- [RestrictedEnvironment.lua](https://github.com/Gethe/wow-ui-source/blob/forever/Interface/AddOns/Blizzard_RestrictedAddOnEnvironment/RestrictedEnvironment.lua): the restricted snippet API does not expose `SetRaidTarget` or `RunMacroText`. Reading modifier state in a snippet does not by itself grant access to either operation.
+
+These are moving source references, not a binary-level proof about every possible technique. Together with the live failure, they provide no supported same-interaction mechanism to justify another speculative user test. Engineering recommendation: **no-go for the current exact hold-and-sweep requirement on the tested client**. Revisit only with a concrete supported API change or new evidence, or an explicitly agreed product-scope change. No further user action is required now; per-mob click/key marking would be a different interaction and has not been implemented or tested here.
