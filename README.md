@@ -2,7 +2,7 @@
 
 A project to bring MagicMarker's **hold a modifier and sweep the mouse across a hostile pack** interaction to World of Warcraft: Forever, before combat.
 
-**Status: M0 feasibility. Not yet a validated gameplay addon.** The exact precombat interaction must pass an in-game test before implementation proceeds. A separate click per mob does not meet the project requirement.
+**Status: M0 blocked by the first live test. Not a working gameplay addon.** On Forever build 70862 the direct mouseover `SetRaidTarget` call was forbidden, and the tester saw no icons. See [live evidence](qa/LIVE_RESULT_2026-11-09.md). The exact precombat interaction must pass an in-game test before implementation proceeds. A separate click per mob does not meet the project requirement.
 
 ## Scope
 

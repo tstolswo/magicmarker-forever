@@ -80,6 +80,7 @@ local function scenario(setRaidTargetMode)
         start = start, setCombat = function(lock, combat) combatLock, playerCombat = lock, combat end,
         setAlt = function(value) altDown = value end,
         combatEvent = function() frames[1].scripts.OnEvent(frames[1], "PLAYER_REGEN_DISABLED") end,
+        newTest = function() SlashCmdList.MAGICMARKERFOREVERPROBE("newtest") end,
         calls = function() return callCount end,
         active = function() return true end,
     }
@@ -95,6 +96,20 @@ do
     s.setAlt(false)
     s.mouseover("target")
     equal(s.calls(), 0, "ALT-up API calls")
+end
+
+-- Starting a new test session clears reservations and disarms automation.
+do
+    local s = scenario()
+    s.addMob("target", "g-newtest")
+    s.start()
+    s.newTest()
+    s.mouseover("target")
+    equal(s.calls(), 0, "newtest disarms")
+    equal(s.db.assignments["g-newtest"], nil, "newtest reservation")
+    s.start()
+    s.mouseover("target")
+    equal(s.calls(), 1, "newtest requires explicit rearm")
 end
 
 -- Combat start disarms; later mouseover while still held must not mark.
